@@ -1,0 +1,1 @@
+Currently only iterates through the suit/card combinations in the console. More to come.
