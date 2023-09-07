@@ -11,7 +11,7 @@ body {
 }
 
 .start-menu-container {
-    display: none;
+    display: flex;
     justify-content: center;
     width: 100%;
 }
@@ -94,7 +94,7 @@ body {
 
 @media only screen and (min-width: 992px) {
     #dealer {
-        display: grid;
+        display: none;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 0px;
@@ -128,7 +128,7 @@ body {
     }
 
     #player {
-        display: grid;
+        display: none;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 0px;
