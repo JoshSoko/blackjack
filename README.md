@@ -2,7 +2,7 @@
 
 - [x] Main menu built
 - [X] Game starts on start
-- [ ] Cards dealt
+- [X] Cards dealt
 - [ ] 21 wins instantly
 - [ ] Hit function
 - [ ] Pass function

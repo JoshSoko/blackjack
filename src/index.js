@@ -12,36 +12,55 @@ for (let suit in suits) {
 let mainMenu = document.getElementById("main-menu");
 let dealer = document.getElementById("dealer");
 let player = document.getElementById("player");
+let label = document.getElementById("announce");
 // Hides menu, displays game, starts a round
 function startGame() {
     mainMenu.style.display = 'none';
-    player.style.display = 'grid';
-    dealer.style.display = 'grid';
+    player.style.display = 'flex';
+    dealer.style.display = 'flex';
     singleRound();
 }
 // A new round
 function singleRound() {
-    let dealerCount = 0;
-    let playerCount = 0;
+    label.innerHTML = "";
+    let dealerScore = 0;
+    let playerScore = 0;
     // A new deck is created
     let roundDeck = [...deck];
-    // The dealer is dealt out
-    let hidden = cardMath(roundDeck);
-    cardLabel(1, cardMath(roundDeck));
+    // Deal out dealer and player
+    for (let i = 0; i <= 3; i++) {
+        cardLabel(i, cardMath(roundDeck));
+    }
+    // Tally up scores between cards
+    dealerScore += blackjackCheck(dealer.getElementsByClassName('card'));
+    playerScore += blackjackCheck(player.getElementsByClassName('card'));
+    if (dealerScore == playerScore && dealerScore == 21) {
+        dealerReveal();
+        label.innerText = "Push!";
+        return;
+    }
+    else if (dealerScore == 21) {
+        dealerReveal();
+        label.innerText = "Dealer BlackJack! You Lose!";
+        return;
+    }
+    else if (playerScore == 21) {
+        label.innerText = "BlackJack! You Win!";
+        return;
+    }
 }
 // Repeatable function to randomize a card
 function cardMath(arr) {
-    return arr.splice(Math.floor(Math.random() * Number(arr.length) + 1), 1)[0];
+    let ran = (Math.floor(Math.random() * Number(arr.length)));
+    console.log(ran);
+    let card = arr.splice((ran), 1)[0];
+    return card;
 }
 // Repeatable function to label cards
 function cardLabel(num, str) {
     let newStr = str.split(' ');
-    console.log(newStr[2]);
     let cardName = "card-" + num.toString();
     let card = document.getElementById(cardName);
-    if (!card) {
-        return;
-    }
     let letter = card.getElementsByClassName('letter');
     let suit = card.getElementsByClassName('suit')[0];
     letter[0].innerHTML = newStr[0];
@@ -62,4 +81,26 @@ function cardLabel(num, str) {
         suit.innerHTML = '◆';
         suit.classList.add('red-suit');
     }
+}
+function blackjackCheck(cards) {
+    let total = 0;
+    for (let i = 0; i < 2; i++) {
+        let card = cards[i].children[0].innerHTML;
+        if (card == 'J' || card == 'Q' || card == 'K') {
+            total += 10;
+        }
+        else if (card == 'A') {
+            total += 11;
+        }
+        else {
+            total += parseInt(card);
+        }
+    }
+    return total;
+}
+function dealerReveal() {
+    Array.from(document.querySelectorAll('.hidden')).forEach(function (item) {
+        item.classList.remove('hidden');
+    });
+    document.getElementById('hidden-back').style.display = "none";
 }

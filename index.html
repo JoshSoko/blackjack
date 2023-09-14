@@ -33,10 +33,12 @@
             <div id="deck">
                 <img id="deck-img" src="public/card-back.png">
             </div>
-            <div id="dealer-card-overflow"></div>
             <div id="dealer-cards">
-                <div id="d-card-hidden" class="card">
-                    <img src="public/card-back.png">
+                <div id="card-0" class="card">
+                    <p class="letter hidden">A</p>
+                    <p class="suit hidden">◆</p>
+                    <p class="letter btm-letter hidden">A</p>
+                    <img id="hidden-back" src="public/card-back.png">
                 </div>
                 <div id="card-1" class="card">
                     <p class="letter">A</p>
@@ -45,9 +47,21 @@
                 </div>
             </div>
         </div>
+        <h2 id="announce"></h2>
         <div id="player">
-            <div id="player-cards"></div>
-            <div id="player-cards-overflow"></div>
+            <div id="player-cards">
+                <div id="card-2" class="card">
+                    <p class="letter">A</p>
+                    <p class="suit">◆</p>
+                    <p class="letter btm-letter">A</p>
+                </div>
+                <div id="card-3" class="card">
+                    <p class="letter">A</p>
+                    <p class="suit">◆</p>
+                    <p class="letter btm-letter">A</p>
+                </div>
+
+            </div>
             <div id="play-menu"></div>
         </div>
     </div>
