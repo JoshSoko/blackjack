@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <p class="warning">Sorry, this site isn't available for small screen sizes (<700px wide)</p>
     <div class="start-menu-container" id="main-menu">
         <div class="menu-card" id="menu-card1"></div>
         <div class="menu-card" id="menu-card2"></div>
@@ -33,7 +34,16 @@
                 <img id="deck-img" src="public/card-back.png">
             </div>
             <div id="dealer-card-overflow"></div>
-            <div id="dealer-cards"></div>
+            <div id="dealer-cards">
+                <div id="d-card-hidden" class="card">
+                    <img src="public/card-back.png">
+                </div>
+                <div id="card-1" class="card">
+                    <p class="letter">A</p>
+                    <p class="suit red-suit">◆</p>
+                    <p class="letter btm-letter">A</p>
+                </div>
+            </div>
         </div>
         <div id="player">
             <div id="player-cards"></div>

@@ -10,89 +10,108 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.warning {
+    text-align: center;
+}
+
 .start-menu-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.menu-card {
-    margin-left: -100px;
-    margin-top: 15%;
-    background-color: rgb(138, 138, 192);
-    background-image: linear-gradient(125deg, #aa271b, #4e0c0c);
-    width: 200px;
-    height: 400px;
-    border: 5px rgb(190, 190, 190) solid;
-    position: absolute;
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    border-radius: 10px;
-    z-index: 1;
-    position: absolute;
-}
-
-#menu-card1 {
-    transform: rotate(10deg) scale(.9) translate(30px, 0px);
-}
-
-#menu-card2 {
-    transform: rotate(-10deg) scale(.9) translate(-30px, 0px);
-}
-
-.menu a {
-    text-decoration: inherit;
-    color: inherit;
-}
-
-.menu-text {
-    height: 30%;
-    text-align: center;
-    padding: 10px;
-}
-
-.menu-link {
-    display: flex;
-    background: rgba(255, 255, 255, 0.2);
-    text-align: center;
-    width: 118px;
-    letter-spacing: 1px;
-    padding: 10px;
-    border: 1px white outset;
-    border-radius: 10px;
-    transition: all .5s;
-    height: 40px;
-    cursor: pointer;
-}
-
-.menu-link h3 {
-    margin: auto;
-}
-
-
-.menu-link:hover {
-    color: rgb(240, 94, 94);
-    border: 1px inset #e66465;
-    height: 80px;
-    width: 178px;
-    font-size: 25px;
-
+    display: none;
 }
 
 .game-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
+    display: none;
 }
 
-@media only screen and (min-width: 992px) {
+
+@media only screen and (min-width: 700px) {
+    .warning {
+        display: none;
+    }
+    img {
+        display: block;
+    }
+    .start-menu-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .menu-card {
+        margin-top: 15vh;
+        background-color: rgb(138, 138, 192);
+        background-image: linear-gradient(125deg, #aa271b, #4e0c0c);
+        width: 200px;
+        height: 400px;
+        border: 5px rgb(190, 190, 190) solid;
+        position: absolute;
+    }
+    
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 10px;
+        z-index: 1;
+        position: absolute;
+
+    }
+    
+    #menu-card1 {
+        transform: rotate(10deg) scale(.9) translate(30px, 0px);
+    }
+    
+    #menu-card2 {
+        transform: rotate(-10deg) scale(.9) translate(-30px, 0px);
+    }
+    
+    .menu a {
+        text-decoration: inherit;
+        color: inherit;
+    }
+    
+    .menu-text {
+        height: 30%;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .menu-link {
+        display: flex;
+        background: rgba(255, 255, 255, 0.2);
+        text-align: center;
+        width: 118px;
+        letter-spacing: 1px;
+        padding: 10px;
+        border: 1px white outset;
+        border-radius: 10px;
+        transition: all .5s;
+        height: 40px;
+        cursor: pointer;
+    }
+    
+    .menu-link h3 {
+        margin: auto;
+    }
+    
+    
+    .menu-link:hover {
+        color: rgb(240, 94, 94);
+        border: 1px inset #e66465;
+        height: 80px;
+        width: 178px;
+        font-size: 25px;
+    
+    }
+    
+    .game-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
     #dealer {
         display: none;
         grid-template-columns: repeat(3, 1fr);
@@ -103,6 +122,7 @@ body {
         height: 50%;
         width: 98%;
         margin: 1%;
+        
     }
 
     #deck {
@@ -116,15 +136,55 @@ body {
         justify-self: center;
     }
 
+    .card {
+        width: 120px;
+        height: 98%;
+        border: 1px solid black;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: white;
+    }
+
+    .letter {
+        font-size: 30px;
+        font-weight: bold;
+        color: black;
+        height: 20%;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .btm-letter {
+        transform: rotate(180deg);
+    }
+
+    .suit {
+        font-size: 60px;
+        align-self: center;
+        margin: 0px;
+    }
+
+    .red-suit {
+        color: red;
+    }
+
     #dealer-card-overflow {
         background-color: #4e0c0c;
         grid-area: 1 / 2 / 2 / 4;
-
+        display: flex;
+        gap: 5px;
+        align-items: center;
     }
 
     #dealer-cards {
         background-color: #5c4545;
         grid-area: 2 / 2 / 3 / 4;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        align-items: center;
     }
 
     #player {
@@ -142,11 +202,19 @@ body {
     #player-cards {
         background-color: aquamarine;
         grid-area: 1 / 1 / 2 / 3;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        align-items: center;
     }
 
     #player-cards-overflow {
         background-color: cadetblue;
         grid-area: 2 / 1 / 3 / 3;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        align-items: center;
 
     }
 
