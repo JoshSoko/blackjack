@@ -41,16 +41,20 @@ function singleRound() {
     dealerScore += blackjackCheck(dealer!.getElementsByClassName('card'));
     playerScore += blackjackCheck(player!.getElementsByClassName('card'));
 
+    // Check for blackjack
     if (dealerScore == playerScore && dealerScore == 21) {
         dealerReveal();
         label!.innerText = "Push!";
+        menuSwap();
         return;
     } else if (dealerScore == 21) {
         dealerReveal();
         label!.innerText = "Dealer BlackJack! You Lose!";
+        menuSwap();
         return;
     } else if (playerScore == 21) {
         label!.innerText = "BlackJack! You Win!";
+        menuSwap();
         return;
     }
 }
@@ -96,6 +100,7 @@ function cardLabel(num: number, str: string) {
         
 }
 
+// Adds up cards for blackjack
 function blackjackCheck(cards: HTMLCollectionOf<Element>) {
     let total: number = 0;
     
@@ -116,6 +121,7 @@ function blackjackCheck(cards: HTMLCollectionOf<Element>) {
     return total;
 }
 
+// Reveal dealer's hidden card
 function dealerReveal() {
     
     Array.from(document.querySelectorAll('.hidden')).forEach(function(item) {
@@ -123,4 +129,47 @@ function dealerReveal() {
     })
 
     document.getElementById('hidden-back')!.style.display = "none";
+}
+
+// Change menu options when the game ends
+function menuSwap() {
+    document.getElementById('next')!.style.display = "block";
+
+    document.getElementById('hit')!.style.display = "none";
+    document.getElementById('pass')!.style.display = "none";
+    document.getElementById('quit')!.style.display = "none";
+}
+
+// Stuff to do before a new round is started
+function cleanup() {
+    // Switch menu options back
+    document.getElementById('next')!.style.display = "none";
+
+    document.getElementById('hit')!.style.display = "block";
+    document.getElementById('pass')!.style.display = "block";
+    document.getElementById('quit')!.style.display = "block";
+
+    // Here's where we'll delete extraneous cards
+
+    // And start a new round
+    singleRound();
+}
+
+// Player hits
+function hit() {
+
+    // Player gets another card
+
+    // If player goes over 21, they lose automatically
+
+    // If player hits 21, they pass automatically
+}
+
+// Player passes, starting dealer turn
+function pass() {
+    dealerReveal();
+
+    // Dealer deals self cards, stopping when he hits 15
+
+    // Game checks who has the higher score and declares a winner
 }

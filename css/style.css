@@ -1,5 +1,5 @@
 html {
-    height: 100%;
+    height: 96%;
 }
 
 body {
@@ -112,23 +112,24 @@ body {
         flex-direction: column;
         margin: 0;
         padding: 0;
+        gap: 5px;
     }
 
     #announce {
         position: aboslute;
         margin: 0;
+        text-align: center;
     }
 
     #dealer {
         display: none;
-        background-color: darkcyan;
         height: 100%;
         width: 98%;
-        margin: 1%;
+        margin: 3% 1% 1% 1%;
+        background-color: #35654d;
     }
 
     #dealer-cards {
-        background-color: #5c4545;
         height: 50%;
         width: 70%;
         display: flex;
@@ -138,18 +139,18 @@ body {
         align-items: center;
         flex-wrap: wrap-reverse;
         align-self: flex-end;
+        padding-bottom: 10px;
     }
 
     #player {
         display: none;
-        background-color: darkcyan;
         height: 100%;
         width: 98%;
         margin: 1%;
+        background-color: #35654d;
     }
 
     #player-cards {
-        background-color: aquamarine;
         height: 50%;
         width: 70%;
         display: flex;
@@ -157,17 +158,20 @@ body {
         gap: 5px;
         align-items: center;
         flex-wrap: wrap;
+        padding-top: 10px;
     }
 
     #play-menu {
-        background-color: cornflowerblue;
         height: 100%;
         width: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
     }
 
 
     #deck {
-        background-color: cornflowerblue;
         height: 100%;
         width: 30%;
         display: grid;
@@ -223,6 +227,38 @@ body {
 
     .black-suit {
         color: black;
+    }
+    #play-container {
+        width: 70%;
+        max-width: 220px;
+        height: 220px;
+        border: 2px solid black;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+    .option {
+        width: 90%;
+        max-width: 200px;
+        height: 33%;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .option:hover {
+        background-color: #4e0c0c;
+    }
+
+    .option:active {
+        border: 2px inset rebeccapurple;
+    }
+
+    .next {
+        display: none;
     }
 
 }
