@@ -5,7 +5,7 @@ const suits = ["spades", "hearts", "clubs", "diamonds"];
 const deck = [];
 for (let suit in suits) {
     for (let card in cards) {
-        deck.push(card + " of " + suits[suit]);
+        deck.push(cards[card] + " of " + suits[suit]);
     }
 }
 // Assign variables for commonly used elements
@@ -35,13 +35,31 @@ function cardMath(arr) {
 }
 // Repeatable function to label cards
 function cardLabel(num, str) {
-    var _a;
-    console.log(str);
     let newStr = str.split(' ');
+    console.log(newStr[2]);
     let cardName = "card-" + num.toString();
-    let card = (_a = document.getElementById(cardName)) === null || _a === void 0 ? void 0 : _a.getElementsByClassName('letter');
-    if (card) {
-        card[0].innerHTML = newStr[0];
-        card[1].innerHTML = newStr[0];
+    let card = document.getElementById(cardName);
+    if (!card) {
+        return;
+    }
+    let letter = card.getElementsByClassName('letter');
+    let suit = card.getElementsByClassName('suit')[0];
+    letter[0].innerHTML = newStr[0];
+    letter[1].innerHTML = newStr[0];
+    if (newStr[2] == 'hearts') {
+        suit.innerHTML = '♥';
+        suit.classList.add('red-suit');
+    }
+    else if (newStr[2] == 'spades') {
+        suit.innerHTML = '♠';
+        suit.classList.add('black-suit');
+    }
+    else if (newStr[2] == 'clubs') {
+        suit.innerHTML = '♣';
+        suit.classList.add('black-suit');
+    }
+    else {
+        suit.innerHTML = '◆';
+        suit.classList.add('red-suit');
     }
 }

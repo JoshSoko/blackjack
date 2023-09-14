@@ -5,7 +5,7 @@ const deck: string[] = [];
 
 for (let suit in suits) {
     for (let card in cards) {
-        deck.push(card + " of " + suits[suit]) ;
+        deck.push(cards[card] + " of " + suits[suit]) ;
     }
 }
 
@@ -46,9 +46,34 @@ function cardMath(arr: string[]) {
 function cardLabel(num: number, str: string) {
     let newStr = str.split(' ');
     let cardName = "card-" + num.toString();
-    let card = document.getElementById(cardName)?.getElementsByClassName('letter');
-    if (card) {
-        card[0].innerHTML = newStr[0];
-        card[1].innerHTML = newStr[0];
+    let card = document.getElementById(cardName);
+
+    if (!card) {
+        return;
     }
+
+    let letter = card.getElementsByClassName('letter');
+    let suit = card.getElementsByClassName('suit')[0];
+    letter[0].innerHTML = newStr[0];
+    letter[1].innerHTML = newStr[0];
+
+    if (newStr[2] == 'hearts') {
+        suit.innerHTML = '♥';
+        suit.classList.add('red-suit');
+    }
+        
+    else if (newStr[2] == 'spades'){
+        suit.innerHTML = '♠';
+        suit.classList.add('black-suit');
+    }
+    else if (newStr[2] == 'clubs'){
+        suit.innerHTML = '♣';
+        suit.classList.add('black-suit');
+    }
+    else {
+        suit.innerHTML = '◆';
+        suit.classList.add('red-suit');
+    }
+        
+        
 }
