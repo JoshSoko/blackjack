@@ -20,4 +20,4 @@ potential features
 
 bugs
 - [X] Cleanup doesn't hide dealer's card again
-- [ ] Color style tags aren't removed from clones
+- [X] Color style tags aren't removed from clones

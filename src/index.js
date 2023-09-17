@@ -126,6 +126,9 @@ function playerHit() {
     cardNum += 1;
     newCard.id = "card-" + cardNum;
     (_a = document.getElementById("player-cards")) === null || _a === void 0 ? void 0 : _a.appendChild(newCard);
+    for (let i = 0; i < 3; i++) {
+        document.getElementById("card-" + cardNum).children[i].classList.remove('black-suit');
+    }
     // calling the functions for a new label
     cardLabel(cardNum, cardMath(roundDeck));
     // and adding up their current score
@@ -186,6 +189,9 @@ function dealerHit() {
     cardNum += 1;
     newCard.id = "card-" + cardNum;
     (_a = document.getElementById("dealer-cards")) === null || _a === void 0 ? void 0 : _a.appendChild(newCard);
+    for (let i = 0; i < 3; i++) {
+        document.getElementById("card-" + cardNum).children[i].classList.remove('black-suit');
+    }
     // calling the functions for a new label
     cardLabel(cardNum, cardMath(roundDeck));
     // and adding up their current score
@@ -252,6 +258,13 @@ function cleanup() {
         document.getElementById("card-0").children[i].classList.add("hidden");
     }
     document.getElementById('hidden-back').style.display = "block";
+    // Remove black from cards
+    for (let i = 0; i < 4; i++) {
+        let card = document.getElementById("card-" + i);
+        for (let j = 0; j < 3; j++) {
+            card === null || card === void 0 ? void 0 : card.children[j].classList.remove('black-suit');
+        }
+    }
     // And start a new round
     singleRound();
 }
