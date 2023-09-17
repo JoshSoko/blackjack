@@ -199,6 +199,21 @@ function pass() {
         dealerHit();
     }
     // Game checks who has the higher score and declares a winner
+    if (dealerScore > 21) {
+        label.innerText = "Dealer Busts! You Win!";
+        menuSwap();
+        return;
+    }
+    if (dealerScore == playerScore) {
+        label.innerText = "Push!";
+    }
+    else if (dealerScore > playerScore) {
+        label.innerText = "Higher Dealer Hand! You Lose!";
+    }
+    else {
+        label.innerText = "Higher Player Hand! You Win!";
+    }
+    menuSwap();
 }
 // Dealer gets their cards
 function dealerHit() {
@@ -219,12 +234,6 @@ function dealerHit() {
     while (dealerScore > 21 && dealerAces > 0) {
         aceCheck("dealer");
     }
-    if (dealerScore > 21) {
-        label.innerText = "Dealer Busts! You Win!";
-        menuSwap();
-        return;
-    }
-    console.log(dealerScore);
 }
 // If the score is over 21 but the player has aces that are being counted for 11 points, just subtract 10
 function aceCheck(team) {

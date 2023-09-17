@@ -9,11 +9,15 @@
     - [X] Pass at 21
 - [X] Pass function
     - [X] Dealer hitting to 15
-    - [ ] Bust over 21
-- [ ] Find higher scoring player
+    - [X] Bust over 21
+- [X] Find higher scoring player
 - [X] Cleanup
 - [X] Start new round
 
 potential features
 - [ ] Splitting
 - [ ] Wagers
+
+bugs
+- [ ] Cleanup doesn't hide dealer's card again
+- [ ] Color style tags aren't removed from clones
