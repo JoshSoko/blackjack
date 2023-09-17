@@ -4,14 +4,14 @@
 - [X] Game starts on start
 - [X] Cards dealt
 - [X] 21 wins instantly
-- [ ] Hit function
-    - [ ] Bust over 21
-    - [ ] Pass at 21
-- [ ] Pass function
-    - [ ] Dealer hitting to 15
+- [X] Hit function
+    - [X] Bust over 21
+    - [X] Pass at 21
+- [X] Pass function
+    - [X] Dealer hitting to 15
     - [ ] Bust over 21
 - [ ] Find higher scoring player
-- [ ] Cleanup
+- [X] Cleanup
 - [X] Start new round
 
 potential features

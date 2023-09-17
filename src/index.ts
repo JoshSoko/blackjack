@@ -15,6 +15,14 @@ let dealer = document.getElementById("dealer");
 let player = document.getElementById("player");
 let label = document.getElementById("announce");
 
+// Set global variables
+let roundDeck: string[] = [];
+let playerAces = 0;
+let dealerAces = 0;
+let dealerScore = 0;
+let playerScore = 0;
+let cardNum = 2;
+
 // Hides menu, displays game, starts a round
 function startGame() {
     mainMenu!.style.display = 'none';
@@ -26,11 +34,13 @@ function startGame() {
 // A new round
 function singleRound() {
     label!.innerHTML = "";
-    let dealerScore = 0;
-    let playerScore = 0;
+    dealerAces = 0;
+    playerAces = 0;
+    dealerScore = 0;
+    playerScore = 0;
 
     // A new deck is created
-    let roundDeck = [...deck];
+    roundDeck = [...deck];
 
     // Deal out dealer and player
     for (let i = 0; i <= 3; i++) {
@@ -38,8 +48,8 @@ function singleRound() {
     }
 
     // Tally up scores between cards
-    dealerScore += blackjackCheck(dealer!.getElementsByClassName('card'));
-    playerScore += blackjackCheck(player!.getElementsByClassName('card'));
+    dealerScore += blackjackCheck(dealer!.getElementsByClassName('card'), "dealer");
+    playerScore += blackjackCheck(player!.getElementsByClassName('card'), "player");
 
     // Check for blackjack
     if (dealerScore == playerScore && dealerScore == 21) {
@@ -57,13 +67,13 @@ function singleRound() {
         menuSwap();
         return;
     }
+
 }
     
 
 // Repeatable function to randomize a card
 function cardMath(arr: string[]) {
     let ran = (Math.floor(Math.random() * Number(arr.length)));
-    console.log(ran);
     let card = arr.splice((ran), 1)[0];
     return card;
 }
@@ -101,7 +111,7 @@ function cardLabel(num: number, str: string) {
 }
 
 // Adds up cards for blackjack
-function blackjackCheck(cards: HTMLCollectionOf<Element>) {
+function blackjackCheck(cards: HTMLCollectionOf<Element>, team: string) {
     let total: number = 0;
     
     for (let i=0; i<2; i++){
@@ -112,6 +122,10 @@ function blackjackCheck(cards: HTMLCollectionOf<Element>) {
         }
         else if (card == 'A') {
             total += 11;
+            if (team == 'dealer')
+                dealerAces += 1;
+            else
+                playerAces += 1;
         }
         else {
             total += parseInt(card);
@@ -150,26 +164,128 @@ function cleanup() {
     document.getElementById('quit')!.style.display = "block";
 
     // Here's where we'll delete extraneous cards
+    for (cardNum; cardNum > 2; cardNum--) {
+        document.getElementById("card-" + cardNum)?.remove();
+    }
 
     // And start a new round
     singleRound();
 }
 
 // Player hits
-function hit() {
+function playerHit() {
 
-    // Player gets another card
+    // Player gets another card,
+    // by cloning an existing card,
+    let card = document.getElementById("card-3");
+    let newCard = card!.cloneNode(true) as HTMLElement;
 
+    // incrementing the global variable to name it,
+    cardNum += 1;
+    newCard.id = "card-" + cardNum;
+    document.getElementById("player-cards")?.appendChild(newCard);
+
+    // calling the functions for a new label
+    cardLabel(cardNum, cardMath(roundDeck));
+
+    // and adding up their current score
+    playerScore += totalMath(document.getElementById("card-" + cardNum)!.children[0].innerHTML, "player");
+    
     // If player goes over 21, they lose automatically
+    while (playerScore > 21 && playerAces > 0) {
+        aceCheck("player");
+    }
+    if (playerScore > 21){
+        label!.innerText = "Bust! You Lose!";
+        menuSwap();
+        return;
+    }
 
     // If player hits 21, they pass automatically
+    if (playerScore == 21) {
+        pass();
+    }
+}
+
+// Actual card total math
+function totalMath(card: string, team: string) {
+    let total = 0;
+
+    if (card == 'J' || card == 'Q' || card == 'K') {
+        total += 10;
+    }
+    else if (card == 'A') {
+            total += 11;
+            if (team == "dealer")
+                dealerAces += 1;
+            else
+                playerAces += 1;
+    }
+    else {
+            total += parseInt(card);
+    }
+
+    return total;
 }
 
 // Player passes, starting dealer turn
 function pass() {
+
+    // Dealer reveals cards
     dealerReveal();
 
-    // Dealer deals self cards, stopping when he hits 15
+    while (dealerScore <= 15) {
+        dealerHit();
+    }
 
     // Game checks who has the higher score and declares a winner
+
+    
+}
+
+// Dealer gets their cards
+function dealerHit() {
+    // Dealer gets another card,
+    // by cloning an existing card,
+    let card = document.getElementById("card-1");
+    let newCard = card!.cloneNode(true) as HTMLElement;
+
+    // incrementing the global variable to name it,
+    cardNum += 1;
+    newCard.id = "card-" + cardNum;
+    document.getElementById("dealer-cards")?.appendChild(newCard);
+
+    // calling the functions for a new label
+    cardLabel(cardNum, cardMath(roundDeck));
+
+    // and adding up their current score
+    dealerScore += totalMath(document.getElementById("card-" + cardNum)!.children[0].innerHTML, "dealer");
+    
+    // If dealer goes over 21, they lose automatically
+    while (dealerScore > 21 && dealerAces > 0) {
+        aceCheck("dealer");
+    }
+    if (dealerScore > 21){
+        label!.innerText = "Dealer Busts! You Win!";
+        menuSwap();
+        return;
+    }
+    console.log(dealerScore);
+}
+
+// If the score is over 21 but the player has aces that are being counted for 11 points, just subtract 10
+function aceCheck(team: string){
+    if (team == "player") {
+        if (playerAces > 0) {
+            playerScore -= 10;
+            playerAces -= 1;
+        }
+    }
+    else {
+        if (dealerAces > 0) {
+            dealerScore -= 10;
+            dealerAces -= 1;
+        }
+    }
+    
 }
