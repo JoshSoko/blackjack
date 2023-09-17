@@ -17,6 +17,7 @@
 potential features
 - [ ] Splitting
 - [ ] Wagers
+- [ ] Display each hand total?
 
 bugs
 - [X] Cleanup doesn't hide dealer's card again
