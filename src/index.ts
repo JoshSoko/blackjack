@@ -5,7 +5,7 @@ const deck: string[] = [];
 
 for (let suit in suits) {
     for (let card in cards) {
-        deck.push(cards[card] + " of " + suits[suit]) ;
+        deck.push(cards[card] + " of " + suits[suit]);
     }
 }
 
@@ -69,7 +69,6 @@ function singleRound() {
     }
 
 }
-    
 
 // Repeatable function to randomize a card
 function cardMath(arr: string[]) {
@@ -93,12 +92,12 @@ function cardLabel(num: number, str: string) {
         suit.innerHTML = '♥';
         suit.classList.add('red-suit');
     }
-        
-    else if (newStr[2] == 'spades'){
+
+    else if (newStr[2] == 'spades') {
         suit.innerHTML = '♠';
         suit.classList.add('black-suit');
     }
-    else if (newStr[2] == 'clubs'){
+    else if (newStr[2] == 'clubs') {
         suit.innerHTML = '♣';
         suit.classList.add('black-suit');
     }
@@ -106,19 +105,19 @@ function cardLabel(num: number, str: string) {
         suit.innerHTML = '◆';
         suit.classList.add('red-suit');
     }
-        
-        
+
+
 }
 
 // Adds up cards for blackjack
 function blackjackCheck(cards: HTMLCollectionOf<Element>, team: string) {
     let total: number = 0;
-    
-    for (let i=0; i<2; i++){
+
+    for (let i = 0; i < 2; i++) {
         let card = cards[i].children[0].innerHTML;
 
         if (card == 'J' || card == 'Q' || card == 'K') {
-        total += 10;
+            total += 10;
         }
         else if (card == 'A') {
             total += 11;
@@ -131,45 +130,8 @@ function blackjackCheck(cards: HTMLCollectionOf<Element>, team: string) {
             total += parseInt(card);
         }
     }
-    
+
     return total;
-}
-
-// Reveal dealer's hidden card
-function dealerReveal() {
-    
-    Array.from(document.querySelectorAll('.hidden')).forEach(function(item) {
-        item.classList.remove('hidden');
-    })
-
-    document.getElementById('hidden-back')!.style.display = "none";
-}
-
-// Change menu options when the game ends
-function menuSwap() {
-    document.getElementById('next')!.style.display = "block";
-
-    document.getElementById('hit')!.style.display = "none";
-    document.getElementById('pass')!.style.display = "none";
-    document.getElementById('quit')!.style.display = "none";
-}
-
-// Stuff to do before a new round is started
-function cleanup() {
-    // Switch menu options back
-    document.getElementById('next')!.style.display = "none";
-
-    document.getElementById('hit')!.style.display = "block";
-    document.getElementById('pass')!.style.display = "block";
-    document.getElementById('quit')!.style.display = "block";
-
-    // Here's where we'll delete extraneous cards
-    for (cardNum; cardNum > 2; cardNum--) {
-        document.getElementById("card-" + cardNum)?.remove();
-    }
-
-    // And start a new round
-    singleRound();
 }
 
 // Player hits
@@ -190,12 +152,12 @@ function playerHit() {
 
     // and adding up their current score
     playerScore += totalMath(document.getElementById("card-" + cardNum)!.children[0].innerHTML, "player");
-    
+
     // If player goes over 21, they lose automatically
     while (playerScore > 21 && playerAces > 0) {
         aceCheck("player");
     }
-    if (playerScore > 21){
+    if (playerScore > 21) {
         label!.innerText = "Bust! You Lose!";
         menuSwap();
         return;
@@ -205,27 +167,6 @@ function playerHit() {
     if (playerScore == 21) {
         pass();
     }
-}
-
-// Actual card total math
-function totalMath(card: string, team: string) {
-    let total = 0;
-
-    if (card == 'J' || card == 'Q' || card == 'K') {
-        total += 10;
-    }
-    else if (card == 'A') {
-            total += 11;
-            if (team == "dealer")
-                dealerAces += 1;
-            else
-                playerAces += 1;
-    }
-    else {
-            total += parseInt(card);
-    }
-
-    return total;
 }
 
 // Player passes, starting dealer turn
@@ -256,6 +197,16 @@ function pass() {
     menuSwap();
 }
 
+// Reveal dealer's hidden card
+function dealerReveal() {
+
+    Array.from(document.querySelectorAll('.hidden')).forEach(function (item) {
+        item.classList.remove('hidden');
+    })
+
+    document.getElementById('hidden-back')!.style.display = "none";
+}
+
 // Dealer gets their cards
 function dealerHit() {
     // Dealer gets another card,
@@ -273,15 +224,36 @@ function dealerHit() {
 
     // and adding up their current score
     dealerScore += totalMath(document.getElementById("card-" + cardNum)!.children[0].innerHTML, "dealer");
-    
+
     // If dealer goes over 21, they lose automatically
     while (dealerScore > 21 && dealerAces > 0) {
         aceCheck("dealer");
     }
 }
 
+// Actual card total math
+function totalMath(card: string, team: string) {
+    let total = 0;
+
+    if (card == 'J' || card == 'Q' || card == 'K') {
+        total += 10;
+    }
+    else if (card == 'A') {
+        total += 11;
+        if (team == "dealer")
+            dealerAces += 1;
+        else
+            playerAces += 1;
+    }
+    else {
+        total += parseInt(card);
+    }
+
+    return total;
+}
+
 // If the score is over 21 but the player has aces that are being counted for 11 points, just subtract 10
-function aceCheck(team: string){
+function aceCheck(team: string) {
     if (team == "player") {
         if (playerAces > 0) {
             playerScore -= 10;
@@ -294,5 +266,38 @@ function aceCheck(team: string){
             dealerAces -= 1;
         }
     }
-    
+
+}
+
+// Change menu options when the game ends
+function menuSwap() {
+    document.getElementById('next')!.style.display = "block";
+
+    document.getElementById('hit')!.style.display = "none";
+    document.getElementById('pass')!.style.display = "none";
+    document.getElementById('quit')!.style.display = "none";
+}
+
+// Stuff to do before a new round is started
+function cleanup() {
+    // Switch menu options back
+    document.getElementById('next')!.style.display = "none";
+
+    document.getElementById('hit')!.style.display = "block";
+    document.getElementById('pass')!.style.display = "block";
+    document.getElementById('quit')!.style.display = "block";
+
+    // Here's where we'll delete extraneous cards
+    for (cardNum; cardNum > 2; cardNum--) {
+        document.getElementById("card-" + cardNum)?.remove();
+    }
+
+    // Hide the dealer card again
+    for (let i = 0; i < 3; i++){
+        document.getElementById("card-0")!.children[i].classList.add("hidden");
+    }
+    document.getElementById('hidden-back')!.style.display = "block";
+
+    // And start a new round
+    singleRound();
 }

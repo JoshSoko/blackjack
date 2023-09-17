@@ -19,5 +19,5 @@ potential features
 - [ ] Wagers
 
 bugs
-- [ ] Cleanup doesn't hide dealer's card again
+- [X] Cleanup doesn't hide dealer's card again
 - [ ] Color style tags aren't removed from clones

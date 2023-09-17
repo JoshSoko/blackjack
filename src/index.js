@@ -115,35 +115,6 @@ function blackjackCheck(cards, team) {
     }
     return total;
 }
-// Reveal dealer's hidden card
-function dealerReveal() {
-    Array.from(document.querySelectorAll('.hidden')).forEach(function (item) {
-        item.classList.remove('hidden');
-    });
-    document.getElementById('hidden-back').style.display = "none";
-}
-// Change menu options when the game ends
-function menuSwap() {
-    document.getElementById('next').style.display = "block";
-    document.getElementById('hit').style.display = "none";
-    document.getElementById('pass').style.display = "none";
-    document.getElementById('quit').style.display = "none";
-}
-// Stuff to do before a new round is started
-function cleanup() {
-    var _a;
-    // Switch menu options back
-    document.getElementById('next').style.display = "none";
-    document.getElementById('hit').style.display = "block";
-    document.getElementById('pass').style.display = "block";
-    document.getElementById('quit').style.display = "block";
-    // Here's where we'll delete extraneous cards
-    for (cardNum; cardNum > 2; cardNum--) {
-        (_a = document.getElementById("card-" + cardNum)) === null || _a === void 0 ? void 0 : _a.remove();
-    }
-    // And start a new round
-    singleRound();
-}
 // Player hits
 function playerHit() {
     var _a;
@@ -173,24 +144,6 @@ function playerHit() {
         pass();
     }
 }
-// Actual card total math
-function totalMath(card, team) {
-    let total = 0;
-    if (card == 'J' || card == 'Q' || card == 'K') {
-        total += 10;
-    }
-    else if (card == 'A') {
-        total += 11;
-        if (team == "dealer")
-            dealerAces += 1;
-        else
-            playerAces += 1;
-    }
-    else {
-        total += parseInt(card);
-    }
-    return total;
-}
 // Player passes, starting dealer turn
 function pass() {
     // Dealer reveals cards
@@ -215,6 +168,13 @@ function pass() {
     }
     menuSwap();
 }
+// Reveal dealer's hidden card
+function dealerReveal() {
+    Array.from(document.querySelectorAll('.hidden')).forEach(function (item) {
+        item.classList.remove('hidden');
+    });
+    document.getElementById('hidden-back').style.display = "none";
+}
 // Dealer gets their cards
 function dealerHit() {
     var _a;
@@ -235,6 +195,24 @@ function dealerHit() {
         aceCheck("dealer");
     }
 }
+// Actual card total math
+function totalMath(card, team) {
+    let total = 0;
+    if (card == 'J' || card == 'Q' || card == 'K') {
+        total += 10;
+    }
+    else if (card == 'A') {
+        total += 11;
+        if (team == "dealer")
+            dealerAces += 1;
+        else
+            playerAces += 1;
+    }
+    else {
+        total += parseInt(card);
+    }
+    return total;
+}
 // If the score is over 21 but the player has aces that are being counted for 11 points, just subtract 10
 function aceCheck(team) {
     if (team == "player") {
@@ -249,4 +227,31 @@ function aceCheck(team) {
             dealerAces -= 1;
         }
     }
+}
+// Change menu options when the game ends
+function menuSwap() {
+    document.getElementById('next').style.display = "block";
+    document.getElementById('hit').style.display = "none";
+    document.getElementById('pass').style.display = "none";
+    document.getElementById('quit').style.display = "none";
+}
+// Stuff to do before a new round is started
+function cleanup() {
+    var _a;
+    // Switch menu options back
+    document.getElementById('next').style.display = "none";
+    document.getElementById('hit').style.display = "block";
+    document.getElementById('pass').style.display = "block";
+    document.getElementById('quit').style.display = "block";
+    // Here's where we'll delete extraneous cards
+    for (cardNum; cardNum > 2; cardNum--) {
+        (_a = document.getElementById("card-" + cardNum)) === null || _a === void 0 ? void 0 : _a.remove();
+    }
+    // Hide the dealer card again
+    for (let i = 0; i < 3; i++) {
+        document.getElementById("card-0").children[i].classList.add("hidden");
+    }
+    document.getElementById('hidden-back').style.display = "block";
+    // And start a new round
+    singleRound();
 }
