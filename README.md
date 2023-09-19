@@ -14,11 +14,6 @@
 - [X] Cleanup
 - [X] Start new round
 
-potential features
-- [ ] Splitting
-- [ ] Wagers
-- [ ] Display each hand total?
-
 bugs
 - [X] Cleanup doesn't hide dealer's card again
 - [X] Color style tags aren't removed from clones

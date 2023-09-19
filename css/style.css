@@ -112,13 +112,25 @@ body {
         flex-direction: column;
         margin: 0;
         padding: 0;
-        gap: 5px;
+        gap: 10px;
     }
 
+    #score {
+        align-self: center;
+        display: flex;
+        gap: 10px;
+        position: absolute;
+        width: 40%;
+        background-color: #203b2d;
+        border-radius: 0 0 20px 20px;
+        justify-content: space-evenly;
+        display: none;
+
+    }
     #announce {
-        position: aboslute;
-        margin: 0;
         text-align: center;
+        width: 90%;
+        margin: 0;
     }
 
     #dealer {
@@ -259,6 +271,12 @@ body {
 
     #next {
         display: none;
+    }
+    .total-text {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
     }
 
 }

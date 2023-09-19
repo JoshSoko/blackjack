@@ -10,70 +10,84 @@
 
 <body>
     <p class="warning">Sorry, this site isn't available for small screen sizes (<700px wide)</p>
-    <div class="start-menu-container" id="main-menu">
-        <div class="menu-card" id="menu-card1"></div>
-        <div class="menu-card" id="menu-card2"></div>
-        <div class="menu menu-card">
-            <div class="menu-text">
-                <h1>Blackjack</h1>
-                <h5>A game programmed with HTML and TypeScript by Joshua Sokolowski in 2023</h5>
+            <div class="start-menu-container" id="main-menu">
+                <div class="menu-card" id="menu-card1"></div>
+                <div class="menu-card" id="menu-card2"></div>
+                <div class="menu menu-card">
+                    <div class="menu-text">
+                        <h1>Blackjack</h1>
+                        <h5>A game programmed with HTML and TypeScript by Joshua Sokolowski in 2023</h5>
+                    </div>
+                    <div class="menu-link" id="start" onclick="startGame()">
+                        <h3>Start</h3>
+                    </div>
+                    <a class="menu-link" href="http://joshsoko.com">
+                        <h3>More from Josh</h3>
+                    </a>
+                    </ul>
+                </div>
             </div>
-            <div class="menu-link" id="start" onclick="startGame()">
-                <h3>Start</h3>
-            </div>
-            <a class="menu-link" href="http://joshsoko.com">
-                <h3>More from Josh</h3>
-            </a>
-            </ul>
-        </div>
-    </div>
 
-    <div class="game-container">
-        <div id="dealer">
-            <div id="deck">
-                <img id="deck-img" src="public/card-back.png">
-            </div>
-            <div id="dealer-cards">
-                <div id="card-0" class="card">
-                    <p class="letter hidden">A</p>
-                    <p class="suit hidden">◆</p>
-                    <p class="letter btm-letter hidden">A</p>
-                    <img id="hidden-back" src="public/card-back.png">
+            <div class="game-container">
+                <div id="score">
+                    <p id="win">Wins: 0</p>
+                    <p id="loss">Losses: 0</p>
+                    <p id="draw">Draws: 0</p>
                 </div>
-                <div id="card-1" class="card">
-                    <p class="letter">A</p>
-                    <p class="suit">◆</p>
-                    <p class="letter btm-letter">A</p>
-                </div>
-            </div>
-        </div>
-        <h2 id="announce"></h2>
-        <div id="player">
-            <div id="player-cards">
-                <div id="card-2" class="card">
-                    <p class="letter">A</p>
-                    <p class="suit">◆</p>
-                    <p class="letter btm-letter">A</p>
-                </div>
-                <div id="card-3" class="card">
-                    <p class="letter">A</p>
-                    <p class="suit">◆</p>
-                    <p class="letter btm-letter">A</p>
-                </div>
+                <div id="dealer">
+                    <div id="deck">
+                        <img id="deck-img" src="public/card-back.png">
+                        <div>
+                            <p class="total-text">Dealer's Hand: </p>
+                            <p class="total-text" id="dealer-total"></p>
+                        </div>
 
-            </div>
-            <div id="play-menu">
-                <div id="play-container">
-                    <button class="option" id="next" onclick="cleanup()">Next Round</button>
-                    <button class="option" id="hit" onclick="playerHit()">Hit</button>
-                    <button class="option" id="pass" onclick="pass()">Pass</button>
-                    <button class="option" id="quit">Quit</button>
+                    </div>
+                    <div id="dealer-cards">
+                        <div id="card-0" class="card">
+                            <p class="letter hidden">A</p>
+                            <p class="suit hidden">◆</p>
+                            <p class="letter btm-letter hidden">A</p>
+                            <img id="hidden-back" src="public/card-back.png">
+                        </div>
+                        <div id="card-1" class="card">
+                            <p class="letter">A</p>
+                            <p class="suit">◆</p>
+                            <p class="letter btm-letter">A</p>
+                        </div>
+                    </div>
+
+                </div>
+                <h2 id="announce"></h2>
+                <div id="player">
+
+                    <div id="player-cards">
+                        <div id="card-2" class="card">
+                            <p class="letter">A</p>
+                            <p class="suit">◆</p>
+                            <p class="letter btm-letter">A</p>
+                        </div>
+                        <div id="card-3" class="card">
+                            <p class="letter">A</p>
+                            <p class="suit">◆</p>
+                            <p class="letter btm-letter">A</p>
+                        </div>
+
+                    </div>
+                    <div id="play-menu">
+                        <div id="play-container">
+                            <div>
+                                <p class="total-text">Your Hand: </p>
+                                <p class="total-text" id="player-total"></p>
+                            </div>
+                            <button class="option" id="next" onclick="cleanup()">Next Round</button>
+                            <button class="option" id="hit" onclick="playerHit()">Hit</button>
+                            <button class="option" id="pass" onclick="pass()">Pass</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
-    <script src="src/index.js"></script>
+            <script src="src/index.js"></script>
 </body>
 
 </html>
