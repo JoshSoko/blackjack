@@ -263,7 +263,7 @@ function aceCheck(team) {
 // Change menu options when the game ends (And update score)
 function menuSwap() {
     document.getElementById('win').innerText = "Wins: " + wins.toString();
-    document.getElementById('loss').innerText = "Wins: " + loss.toString();
+    document.getElementById('loss').innerText = "Losses: " + loss.toString();
     document.getElementById('draw').innerText = "Draws: " + draw.toString();
     document.getElementById('next').style.display = "block";
     document.getElementById('hit').style.display = "none";
